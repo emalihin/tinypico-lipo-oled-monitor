@@ -39,6 +39,25 @@ String readBattery(){
   return String(percentage)+"%";
 }
 
+// Display Battery Level
+void displayBatteryLevel(){
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0,0);
+
+  display.println(readBattery());
+}
+
+// Display something else
+void displayAnotherElement(){
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(44,0);
+
+  display.println("Other Data");
+}
+
+
 void setup() {
   Serial.begin(115200);
 
@@ -53,16 +72,15 @@ void setup() {
   display.drawPixel(10, 10, SSD1306_WHITE);
   display.display();
   delay(1000);
+  display.clearDisplay();
 }
+
 
 void loop() {
   display.clearDisplay();
-
-  display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0,0);
-
-  display.println(readBattery());
+  displayBatteryLevel();
+  displayAnotherElement();
   display.display();
+  
   delay(1000);
 }
